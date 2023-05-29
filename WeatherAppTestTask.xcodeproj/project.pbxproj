@@ -29,6 +29,9 @@
 		3238F13A2A22579E00130C88 /* DailyWeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3238F1392A22579E00130C88 /* DailyWeatherModel.swift */; };
 		3238F13C2A225A5D00130C88 /* CityCurrentWeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3238F13B2A225A5D00130C88 /* CityCurrentWeatherModel.swift */; };
 		3238F14B2A24ED4100130C88 /* MainModuleEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3238F14A2A24ED4100130C88 /* MainModuleEntity.swift */; };
+		326654EC2A25481700D4D686 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326654EB2A25481700D4D686 /* UIViewControllerExtension.swift */; };
+		326654EE2A25502400D4D686 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326654ED2A25502400D4D686 /* UIViewExtension.swift */; };
+		326654F02A2550E700D4D686 /* UIStackViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326654EF2A2550E700D4D686 /* UIStackViewExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +58,9 @@
 		3238F1392A22579E00130C88 /* DailyWeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DailyWeatherModel.swift; path = WeatherAppTestTask/Service/DailyWeatherModel.swift; sourceTree = SOURCE_ROOT; };
 		3238F13B2A225A5D00130C88 /* CityCurrentWeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CityCurrentWeatherModel.swift; path = WeatherAppTestTask/Service/CityCurrentWeatherModel.swift; sourceTree = SOURCE_ROOT; };
 		3238F14A2A24ED4100130C88 /* MainModuleEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModuleEntity.swift; sourceTree = "<group>"; };
+		326654EB2A25481700D4D686 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		326654ED2A25502400D4D686 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		326654EF2A2550E700D4D686 /* UIStackViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStackViewExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +93,7 @@
 		3238F0AE2A1E54E900130C88 /* WeatherAppTestTask */ = {
 			isa = PBXGroup;
 			children = (
+				326654E92A2547FF00D4D686 /* Extensions */,
 				3238F1192A221F8200130C88 /* Core */,
 				3238F11A2A221F9100130C88 /* Resourses */,
 				3238F1312A223D3F00130C88 /* Models */,
@@ -257,6 +264,24 @@
 			name = Entity;
 			sourceTree = "<group>";
 		};
+		326654E92A2547FF00D4D686 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				326654EA2A25480600D4D686 /* UIKit */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		326654EA2A25480600D4D686 /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				326654EB2A25481700D4D686 /* UIViewControllerExtension.swift */,
+				326654ED2A25502400D4D686 /* UIViewExtension.swift */,
+				326654EF2A2550E700D4D686 /* UIStackViewExtension.swift */,
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -329,11 +354,14 @@
 			files = (
 				3238F1272A222C3B00130C88 /* AddCityBuilder.swift in Sources */,
 				3238F0B02A1E54E900130C88 /* AppDelegate.swift in Sources */,
+				326654EE2A25502400D4D686 /* UIViewExtension.swift in Sources */,
 				3238F13A2A22579E00130C88 /* DailyWeatherModel.swift in Sources */,
 				3238F1302A22322D00130C88 /* CityCell.swift in Sources */,
 				3238F12D2A222E3F00130C88 /* DeilyWeatherCell.swift in Sources */,
+				326654EC2A25481700D4D686 /* UIViewControllerExtension.swift in Sources */,
 				3238F1182A221E8F00130C88 /* NetworkProperties.swift in Sources */,
 				3238F10B2A22171C00130C88 /* MainModulePresenter.swift in Sources */,
+				326654F02A2550E700D4D686 /* UIStackViewExtension.swift in Sources */,
 				3238F10F2A2217AC00130C88 /* MainModuleProtocols.swift in Sources */,
 				3238F1382A22575700130C88 /* CurrentWeatherModel.swift in Sources */,
 				3238F0B22A1E54E900130C88 /* MainViewController.swift in Sources */,

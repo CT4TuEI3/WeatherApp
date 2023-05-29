@@ -42,4 +42,8 @@ extension AddCityModulePresenter: AddCityModuleInteractorOutput {
     func setCityWeather(weather: CityCurrentWeatherModel) {
         view?.showCityWeather(weather: weather)
     }
+    
+    func setError(message: String) {
+        view?.showErrorAlert(message: message)
+    }
 }

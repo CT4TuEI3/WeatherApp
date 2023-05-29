@@ -8,17 +8,26 @@
 import Foundation
 
 protocol NetworkServiceProtocol {
-    func getCurrentLocalWeather(lat: Double, lon: Double, completion: @escaping (CurrentWeatherModel) -> ())
-    func getDailyLocalWeather(lat: Double, lon: Double, completion: @escaping (DailyWeatherModel) -> ())
-    func getCityCurrentWeather(name: String, completion: @escaping (CityCurrentWeatherModel) -> ())
+    func getCurrentLocalWeather(lat: Double,
+                                lon: Double,
+                                completion: @escaping (CurrentWeatherModel) -> (),
+                                completionError: @escaping (String) -> ())
+    func getDailyLocalWeather(lat: Double,
+                              lon: Double,
+                              completion: @escaping (DailyWeatherModel) -> (),
+                              completionError: @escaping (String) -> ())
+    func getCityCurrentWeather(name: String,
+                               completion: @escaping (CityCurrentWeatherModel) -> (),
+                               completionError: @escaping (String) -> ())
 }
 
 final class NetworkService: NetworkServiceProtocol {
-    func getCurrentLocalWeather(lat: Double, lon: Double, completion: @escaping (CurrentWeatherModel) -> ()) {
+    func getCurrentLocalWeather(lat: Double,
+                                lon: Double,
+                                completion: @escaping (CurrentWeatherModel) -> (),
+                                completionError: @escaping (String) -> ()) {
         let apiCall = "https://api.openweathermap.org/data/2.5/weather?lat=\(lat)&lon=\(lon)&appid=\(NetworkProperties.API_KEY)&units=metric&lang=ru"
-        guard let url = URL(string: apiCall) else {
-            fatalError()
-        }
+        guard let url = URL(string: apiCall) else { fatalError() }
         let urlRequest = URLRequest(url: url)
         URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
             guard let data = data else { return }
@@ -26,16 +35,17 @@ final class NetworkService: NetworkServiceProtocol {
                 let currentWeather = try JSONDecoder().decode(CurrentWeatherModel.self, from: data)
                 completion(currentWeather)
             } catch {
-                print("Error parcing current weather")
+                completionError(error.localizedDescription)
             }
         }.resume()
     }
     
-    func getDailyLocalWeather(lat: Double, lon: Double, completion: @escaping (DailyWeatherModel) -> ()) {
+    func getDailyLocalWeather(lat: Double,
+                              lon: Double,
+                              completion: @escaping (DailyWeatherModel) -> (),
+                              completionError: @escaping (String) -> ()) {
         let apiCall = "https://api.openweathermap.org/data/3.0/onecall?lat=\(lat)&lon=\(lon)&exclude=minutely,hourly,alertsi&appid=\(NetworkProperties.API_KEY)&units=metric&lang=ru"
-        guard let url = URL(string: apiCall) else {
-            fatalError()
-        }
+        guard let url = URL(string: apiCall) else { fatalError() }
         let urlRequest = URLRequest(url: url)
         URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
             guard let data = data else { return }
@@ -43,12 +53,14 @@ final class NetworkService: NetworkServiceProtocol {
                 let dailyWeather = try JSONDecoder().decode(DailyWeatherModel.self, from: data)
                 completion(dailyWeather)
             } catch {
-                print("Error parcing daily weather")
+                completionError(error.localizedDescription)
             }
         }.resume()
     }
     
-    func getCityCurrentWeather(name: String, completion: @escaping (CityCurrentWeatherModel) -> ()) {
+    func getCityCurrentWeather(name: String,
+                               completion: @escaping (CityCurrentWeatherModel) -> (),
+                               completionError: @escaping (String) -> ()) {
         let apiCall = "https://api.openweathermap.org/data/2.5/weather?q=\(name)&appid=\(NetworkProperties.API_KEY)&units=metric&lang=ru"
         let encodedURL = apiCall.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         guard let url = URL(string: encodedURL) else {
@@ -61,7 +73,7 @@ final class NetworkService: NetworkServiceProtocol {
                 let cityCurrentWeather = try JSONDecoder().decode(CityCurrentWeatherModel.self, from: data)
                 completion(cityCurrentWeather)
             } catch {
-                print("Error parcing city current weather")
+                completionError(error.localizedDescription)
             }
         }.resume()
     }
