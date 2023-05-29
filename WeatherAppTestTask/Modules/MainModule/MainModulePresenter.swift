@@ -43,6 +43,7 @@ extension MainModulePresenter: MainViewControllerOutput {
 // MARK: - MainModuleInteractorOutput
 
 extension MainModulePresenter: MainModuleInteractorOutput {
+    
     func setCurrentLocation(lat: Double, lon: Double) {
         interactor.getLocationWeather(lat: lat, lon: lon)
         interactor.getDailyLocationWeather(lat: lat, lon: lon)
@@ -54,9 +55,5 @@ extension MainModulePresenter: MainModuleInteractorOutput {
     
     func setDailyLocationWeather(dailyWeather: DailyWeatherModel) {
         view?.showDailyLocationWeather(dailyWeather: dailyWeather)
-    }
-    
-    func setErrorMessage(message: String) {
-        view?.showErrorAlert(message: message)
     }
 }

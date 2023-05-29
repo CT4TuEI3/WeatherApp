@@ -33,8 +33,6 @@ extension AddCityModuleInteractor: AddCityModuleInteractorInput {
     func getCityWeather(city: String) {
         networkService.getCityCurrentWeather(name: city) { [weak self] cityWeather in
             self?.output?.setCityWeather(weather: cityWeather)
-        } completionError: { [weak self] error in
-            self?.output?.setError(message: error)
         }
     }
 }

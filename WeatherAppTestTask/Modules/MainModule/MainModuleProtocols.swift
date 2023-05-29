@@ -10,7 +10,6 @@ import Foundation
 protocol MainViewControllerInput: AnyObject {
     func showCurrentLocalWeather(weather: CurrentWeatherModel)
     func showDailyLocationWeather(dailyWeather: DailyWeatherModel)
-    func showErrorAlert(message: String)
 }
 
 protocol MainViewControllerOutput: AnyObject {
@@ -28,5 +27,4 @@ protocol MainModuleInteractorOutput: AnyObject {
     func setCurrentLocation(lat: Double, lon: Double)
     func setCurrentLocationWeather(weather: CurrentWeatherModel)
     func setDailyLocationWeather(dailyWeather: DailyWeatherModel)
-    func setErrorMessage(message: String)
 }

@@ -126,8 +126,4 @@ extension AddCityViewController: AddCityViewControllerInput {
             self.cityesTableView.reloadData()
         }
     }
-    
-    func showErrorAlert(message: String) {
-        showSystemErrorAlert(message: message)
-    }
 }

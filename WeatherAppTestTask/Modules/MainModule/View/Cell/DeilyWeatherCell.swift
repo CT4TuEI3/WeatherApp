@@ -12,7 +12,6 @@ final class DailyWeatherCell: UITableViewCell {
     // MARK: - UI Elements
     
     private let dayLabel = UILabel()
-    private let elementsStackView = UIStackView()
     private let nightTempLabel = UILabel()
     private let dayTempLabel = UILabel()
     private let iconWeatherLabel = UILabel()
@@ -43,16 +42,10 @@ final class DailyWeatherCell: UITableViewCell {
     // MARK: - Private methods
     
     private func setupUI() {
-        addSubviews([dayLabel, elementsStackView])
-        elementsStackView.addArrangedSubviews([iconWeatherLabel,
-                                               nightTempLabel,
-                                               dayTempLabel])
-        elementsStackView.spacing = 16
-        elementsStackView.distribution = .fillEqually
-        iconWeatherLabel.textAlignment = .center
-        dayTempLabel.textAlignment = .center
-        nightTempLabel.textAlignment = .center
-        
+        addSubview(dayLabel)
+        addSubview(nightTempLabel)
+        addSubview(dayTempLabel)
+        addSubview(iconWeatherLabel)
         selectionStyle = .none
         setConstraints()
     }
@@ -91,19 +84,22 @@ final class DailyWeatherCell: UITableViewCell {
     
     private func setConstraints() {
         dayLabel.translatesAutoresizingMaskIntoConstraints = false
-        elementsStackView.translatesAutoresizingMaskIntoConstraints = false
+        nightTempLabel.translatesAutoresizingMaskIntoConstraints = false
+        dayTempLabel.translatesAutoresizingMaskIntoConstraints = false
+        iconWeatherLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            dayLabel.topAnchor.constraint(equalTo: topAnchor),
-            dayLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
+            dayLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             dayLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            dayLabel.trailingAnchor.constraint(equalTo: centerXAnchor),
-            dayLabel.heightAnchor.constraint(equalToConstant: 44),
             
-            elementsStackView.leadingAnchor.constraint(equalTo: centerXAnchor),
-            elementsStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            elementsStackView.topAnchor.constraint(equalTo: topAnchor),
-            elementsStackView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            nightTempLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            nightTempLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -96),
+            
+            dayTempLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            dayTempLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            
+            iconWeatherLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            iconWeatherLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -176)
         ])
     }
 }

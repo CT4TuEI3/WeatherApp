@@ -9,7 +9,6 @@ import Foundation
 
 protocol AddCityViewControllerInput: AnyObject {
     func showCityWeather(weather: CityCurrentWeatherModel)
-    func showErrorAlert(message: String)
 }
 
 protocol AddCityViewControllerOutput: AnyObject {
@@ -22,5 +21,4 @@ protocol AddCityModuleInteractorInput: AnyObject {
 
 protocol AddCityModuleInteractorOutput: AnyObject {
     func setCityWeather(weather: CityCurrentWeatherModel)
-    func setError(message: String)
 }

@@ -54,11 +54,12 @@ final class MainViewController: UIViewController {
     // MARK: Private methods
     
     private func setupUI() {
-        view.addSubviews([cityLabel,
-                          temeperatureLabel,
-                          discriptionWeatherLabel,
-                          mainTableView])
         view.backgroundColor = .white
+        view.addSubview(cityLabel)
+        view.addSubview(temeperatureLabel)
+        view.addSubview(discriptionWeatherLabel)
+        view.addSubview(mainTableView)
+        
         settingsLabels()
         settingsTableView()
         setConstraints()
@@ -147,28 +148,18 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = UIView()
-        let stackView = UIStackView()
-        
-        let sunIconImage = UIImageView(image: UIImage(systemName: "sun.max"))
-        sunIconImage.contentMode = .scaleAspectFit
-        
-        let moonIconImage = UIImageView(image: UIImage(systemName: "moon.stars"))
-        moonIconImage.contentMode = .scaleAspectFit
-        
         header.backgroundColor = .white
-        header.addSubview(stackView)
-        stackView.addArrangedSubviews([UIView(),
-                                       sunIconImage,
-                                       moonIconImage])
-        stackView.spacing = 16
-        stackView.distribution = .fillEqually
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        
+        let sunIconImage = UIImageView(image: UIImage(systemName: "sun.max"))
+        sunIconImage.translatesAutoresizingMaskIntoConstraints = false
+        header.addSubview(sunIconImage)
+        let moonIconImage = UIImageView(image: UIImage(systemName: "moon.stars"))
+        moonIconImage.translatesAutoresizingMaskIntoConstraints = false
+        header.addSubview(moonIconImage)
         NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo: header.centerXAnchor),
-            stackView.trailingAnchor.constraint(equalTo: header.trailingAnchor, constant: -16),
-            stackView.topAnchor.constraint(equalTo: header.topAnchor),
-            stackView.bottomAnchor.constraint(equalTo: header.bottomAnchor),
+            sunIconImage.centerYAnchor.constraint(equalTo: header.centerYAnchor),
+            sunIconImage.trailingAnchor.constraint(equalTo: header.trailingAnchor, constant: -16),
+            moonIconImage.centerYAnchor.constraint(equalTo: header.centerYAnchor),
+            moonIconImage.trailingAnchor.constraint(equalTo: header.trailingAnchor, constant: -96)
         ])
         return header
     }
@@ -191,9 +182,5 @@ extension MainViewController: MainViewControllerInput {
         DispatchQueue.main.async {
             self.mainTableView.reloadData()
         }
-    }
-    
-    func showErrorAlert(message: String) {
-        showSystemErrorAlert(message: message)
     }
 }
