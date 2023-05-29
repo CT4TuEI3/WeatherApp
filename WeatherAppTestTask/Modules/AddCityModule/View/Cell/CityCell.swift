@@ -38,8 +38,7 @@ final class CityCell: UITableViewCell {
     // MARK: - Private methods
     
     private func setupUI() {
-        addSubview(titleCityLabel)
-        addSubview(temperatrueLabel)
+        addSubviews([titleCityLabel, temperatrueLabel])
         titleCityLabel.text = "Город"
         titleCityLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         temperatrueLabel.text = "--"

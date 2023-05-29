@@ -41,12 +41,16 @@ extension MainModuleInteractor: MainModuleInteractorInput {
     func getLocationWeather(lat: Double, lon: Double) {
         networkService.getCurrentLocalWeather(lat: lat, lon: lon) { [weak self] weather in
             self?.output?.setCurrentLocationWeather(weather: weather)
+        } completionError: { [weak self] error in
+            self?.output?.setErrorMessage(message: error)
         }
     }
     
     func getDailyLocationWeather(lat: Double, lon: Double) {
         networkService.getDailyLocalWeather(lat: lat, lon: lon) { [weak self] dailyWeather in
             self?.output?.setDailyLocationWeather(dailyWeather: dailyWeather)
+        } completionError: { [weak self] error in
+            self?.output?.setErrorMessage(message: error)
         }
     }
 }
