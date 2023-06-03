@@ -9,7 +9,7 @@ import Foundation
 
 struct CurrentWeatherModel: Decodable {
     let name: String
-    let sys: CurrentSys
+    var sys: CurrentSys
     let coord: CurrentCoods
     let main: CurrentMain
     let weather: [CurrentWeather]
@@ -30,5 +30,5 @@ struct CurrentWeather: Decodable {
 }
 
 struct CurrentSys: Decodable {
-    let country: String
+    var country: String
 }

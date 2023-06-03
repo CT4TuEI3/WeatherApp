@@ -11,7 +11,7 @@ struct CityCurrentWeatherModel: Decodable {
     let dt: Int
     let name: String
     let coord: CityCoord
-    let sys: CitySys
+    var sys: CitySys
     let main: CityMain
     let weather: [CityWeather]
 }
@@ -31,5 +31,5 @@ struct CityMain: Decodable {
 }
 
 struct CitySys: Decodable {
-    let country: String
+    var country: String
 }
