@@ -22,6 +22,11 @@ protocol NetworkServiceProtocol {
 }
 
 final class NetworkService: NetworkServiceProtocol {
+    private let minLongitude = 32.5
+    private let maxLongitude = 36.5
+    private let minLatitude = 44.0
+    private let maxLatitude = 46.5
+    
     func getCurrentLocalWeather(lat: Double,
                                 lon: Double,
                                 completion: @escaping (CurrentWeatherModel) -> (),
@@ -32,7 +37,14 @@ final class NetworkService: NetworkServiceProtocol {
         URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
             guard let data = data else { return }
             do {
-                let currentWeather = try JSONDecoder().decode(CurrentWeatherModel.self, from: data)
+                var currentWeather = try JSONDecoder().decode(CurrentWeatherModel.self, from: data)
+                if currentWeather.coord.lat >= self.minLatitude &&
+                    currentWeather.coord.lat <= self.maxLatitude &&
+                    currentWeather.coord.lon >= self.minLongitude &&
+                    currentWeather.coord.lon <= self.maxLongitude &&
+                    currentWeather.sys.country == "UA"{
+                    currentWeather.sys.country = "RU"
+                }
                 completion(currentWeather)
             } catch {
                 completionError(error.localizedDescription)
@@ -70,7 +82,14 @@ final class NetworkService: NetworkServiceProtocol {
         URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
             guard let data = data else { return }
             do {
-                let cityCurrentWeather = try JSONDecoder().decode(CityCurrentWeatherModel.self, from: data)
+                var cityCurrentWeather = try JSONDecoder().decode(CityCurrentWeatherModel.self, from: data)
+                if cityCurrentWeather.coord.lat >= self.minLatitude &&
+                    cityCurrentWeather.coord.lat <= self.maxLatitude &&
+                    cityCurrentWeather.coord.lon >= self.minLongitude &&
+                    cityCurrentWeather.coord.lon <= self.maxLongitude &&
+                    cityCurrentWeather.sys.country == "UA"{
+                    cityCurrentWeather.sys.country = "RU"
+                }
                 completion(cityCurrentWeather)
             } catch {
                 completionError(error.localizedDescription)

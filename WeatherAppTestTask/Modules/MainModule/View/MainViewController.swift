@@ -74,9 +74,10 @@ final class MainViewController: UIViewController {
     
     private func setStartData() {
         if controllerType == .selectedLocation {
-            self.cityLabel.text = cityWeather?.name
-            self.temeperatureLabel.text = String(Int(cityWeather?.main.temp ?? 0.0)) + "°"
-            self.discriptionWeatherLabel.text = cityWeather?.weather.first?.description ?? "Нет данных"
+            guard let cityWeather = cityWeather else { return }
+            self.cityLabel.text = "\(cityWeather.name) \(getFlagEmoji(countryCode: cityWeather.sys.country))"
+            self.temeperatureLabel.text = String(Int(cityWeather.main.temp)) + "°"
+            self.discriptionWeatherLabel.text = cityWeather.weather.first?.description ?? "Нет данных"
         }
     }
     
@@ -87,6 +88,15 @@ final class MainViewController: UIViewController {
         temeperatureLabel.font = UIFont.systemFont(ofSize: 48, weight: .light)
         discriptionWeatherLabel.text = "Описание"
         discriptionWeatherLabel.font = UIFont.systemFont(ofSize: 24, weight: .light)
+    }
+    
+    private func getFlagEmoji(countryCode: String) -> String {
+        let base: UInt32 = 127397
+        var answer = ""
+        for i in countryCode.unicodeScalars {
+            answer.unicodeScalars.append(UnicodeScalar(base + i.value)!)
+        }
+        return answer
     }
     
     private func settingsTableView() {
@@ -156,8 +166,8 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         header.backgroundColor = .white
         header.addSubview(stackView)
         stackView.addArrangedSubviews([UIView(),
-                                       sunIconImage,
-                                       moonIconImage])
+                                       moonIconImage,
+                                       sunIconImage])
         stackView.spacing = 16
         stackView.distribution = .fillEqually
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -178,7 +188,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
 extension MainViewController: MainViewControllerInput {
     func showCurrentLocalWeather(weather: CurrentWeatherModel) {
         DispatchQueue.main.async {
-            self.cityLabel.text = weather.name
+            self.cityLabel.text = "\(weather.name) \(self.getFlagEmoji(countryCode: weather.sys.country))"
             self.temeperatureLabel.text = String(Int(weather.main.temp)) + "°"
             self.discriptionWeatherLabel.text = weather.weather.first?.description ?? "Нет данных"
         }
