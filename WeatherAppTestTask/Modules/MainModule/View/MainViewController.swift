@@ -91,8 +91,6 @@ final class MainViewController: UIViewController {
     
     private func settingsTableView() {
         mainTableView.backgroundColor = .white
-        mainTableView.isScrollEnabled = false
-        mainTableView.showsVerticalScrollIndicator = false
         mainTableView.dataSource = self
         mainTableView.delegate = self
         mainTableView.register(DailyWeatherCell.self, forCellReuseIdentifier: dailyCellIdentifire)
