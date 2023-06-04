@@ -90,6 +90,9 @@ final class MainViewController: UIViewController {
         discriptionWeatherLabel.font = UIFont.systemFont(ofSize: 24, weight: .light)
     }
     
+    /// Функция принимает аббревиатуру страны и конвертит в флаг.
+    /// - Parameter countryCode: аббревиатура страны
+    /// - Returns: флаг страны
     private func getFlagEmoji(countryCode: String) -> String {
         let base: UInt32 = 127397
         var answer = ""

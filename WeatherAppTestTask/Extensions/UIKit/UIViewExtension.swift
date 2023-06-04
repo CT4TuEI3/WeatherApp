@@ -9,7 +9,7 @@ import UIKit
 
 extension UIView {
     /// Функция для добавления нескольких views на одну view.
-    ///  Внутри функции выполняется проверка на nil
+    /// Внутри функции выполняется проверка на nil
     func addSubviews(_ views: [UIView?]) {
         views.forEach {
             guard let subview = $0 else { return }

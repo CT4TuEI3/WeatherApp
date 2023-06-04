@@ -8,6 +8,8 @@
 import UIKit
 
 extension UIViewController {
+    /// Показывает алерт с ошибкой
+    /// - Parameter message: Сообщение ошибки
     func showSystemErrorAlert(message: String) {
         DispatchQueue.main.async {
             let alert = UIAlertController(title: "Упс! Что-то пошло не так...",
