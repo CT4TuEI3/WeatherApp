@@ -57,6 +57,9 @@ final class DailyWeatherCell: UITableViewCell {
         setConstraints()
     }
     
+    /// Функция принимает название иконки погоды из прогноза и конвертит в дефолтные смайлики эпла
+    /// - Parameter iconName: Иконка из сервиса
+    /// - Returns: Дефолтный смайлик
     private func getEmojiFromIcon(iconName: String) -> String {
         switch iconName {
             case "01d":
